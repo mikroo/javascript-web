@@ -1,3 +1,4 @@
+/*
 function infosLiens(){
 	var donnees = []; // Création d'un tableau vide
 
@@ -31,7 +32,33 @@ function possede(identifiants, clasNames){
 		}
 	}
 }
+*/
+// Corrections
+// ***********
 
+// Affiche des informations sur les liens
+function infosLiens() {
+	var liensElts = document.getElementsByTagName('a');
+	nombreLiens = liensElts.length;
+	console.log(nombreLiens);
+
+	if(nombreLiens > 0) {
+		console.log(liensElts[0].getAttribute("href")); // Affiche le premier element
+		console.log(liensElts[nombreLiens -1].getAttribute("href")); // Affiche le premier element
+	}
+}
+infosLiens();
+
+// Affiche si un élément possède une classe
+function possede(id, classe){
+	var instrument = document.getElementById(id);
+	if(instrument !== null) {
+		console.log(instrument.classList.contains(classe));
+	} else {
+		console.log("Aucun élément ne possède l'identifiant " + id);
+	}
+
+}
 possede("saxophone", "bois"); // Doit afficher true
 possede("saxophone", "cuivre"); // Doit afficher false
 possede("trompette", "cuivre"); // Doit afficher true
