@@ -1,24 +1,36 @@
 function infosLiens(){
-	// le nombre total de liens dans la page web ;
-	// la cible du premier et du dernier lien.
-	var total = document.querySelectorAll("a").length;
-	console.log(total);
+	var donnees = []; // Création d'un tableau vide
 
-	var liens = document.querySelectorAll("a");
-	console.log(liens[0]);
-	console.log(liens[total -1]);
+	var liens = document.querySelectorAll("a"),
+		totalLiens = liens.length,
+		firstLien = liens[0],
+		lastLien = liens[totalLiens -1];
+	// var lastLien = totalLiens[];
+
+	// Ajout dans le tableau
+	donnees.push(totalLiens); // ajout de nombre total des liens
+	donnees.push(firstLien); // ajout du premier lien
+	donnees.push(lastLien); // ajout du dernier lien
+
+	return donnees;
+}
+// La fonction renvoi un tableau | la lecture du tableau
+for(var i = 0; i < infosLiens()[0]; i++) {
+	console.log(infosLiens()[i]);
 }
 
-infosLiens();
+function possede(identifiants, clasNames){
+	if(document.getElementById(identifiants) === null) {
+		console.log("Aucun élément ne possède l'identifiant " + identifiants);
+	} else {
 
-
-function possede(class1, class2){
-	// 1 recuperer toute les classe
-	classes = document.querySelectorAll(class1, class2).classList;
-	return classes;
-
+		if(document.getElementById(identifiants).classList.contains(clasNames)) {
+			console.log(true);
+		} else {
+			console.log(false);
+		}
+	}
 }
-
 
 possede("saxophone", "bois"); // Doit afficher true
 possede("saxophone", "cuivre"); // Doit afficher false
