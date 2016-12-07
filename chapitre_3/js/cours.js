@@ -56,7 +56,7 @@ document.getElementById("langages").insertBefore(perlElt, document.getElementByI
 
 /*	REMPLACER OU SUPPRIMER UN NOEUD
  * 	Remplacer un noeud existant
-
+ *	!!! Affiche un message d'erreur lors de l'exécution
  var bashElt = document.createElement("li"); // Création d'un élément li
  bashElt.id = "bash"; // Définition de son identifiant
  bashElt.textContent = "Bash"; // Définition de son contenu textuel
@@ -66,3 +66,4 @@ document.getElementById("langages").insertBefore(perlElt, document.getElementByI
 
  // Supprimer un noeud existant
  document.getElementById("langages").removeChild(document.getElementById("php"));
+
