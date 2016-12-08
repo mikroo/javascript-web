@@ -66,4 +66,3 @@ document.getElementById("langages").insertBefore(perlElt, document.getElementByI
 
  // Supprimer un noeud existant
  document.getElementById("langages").removeChild(document.getElementById("php"));
-
