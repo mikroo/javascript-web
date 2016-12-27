@@ -81,7 +81,7 @@ form.addEventListener("submit", function (e) {
     default:
         console.log("Erreur : code de nationalité non reconnu");
     }
-    e.preventDefault(); // Annulation de l'envoi des données
+   //  e.preventDefault(); // Annulation de l'envoi des données
 });
 
 // Validation pendant la saisie
