@@ -47,27 +47,16 @@ maisons.forEach(function(maison){
 });
 
 var formElt = document.querySelector('form'); // recuperer le formulaire
-formElt.addEventListener('change', function(e) {
-    var ulElt = document.getElementById('persos');
-    personnages = getPersonnages(e.target.value);
+formElt.addEventListener('change', function(e){
+    var personnages = getPersonnages(e.target.value); // Liste des personnages
+    var liElt = document.createElement('li'); // créer un éléments liElt
+    liElt.textContent = getPersonnages(e.target.value);
+
+    var ulElt = document.getElementById('persos'); // recuperer le conteneur ul
+    ulElt.innerHTML = ""; // vider le coteneur ul
     personnages.forEach(function(personnage){
-        ulElt.innerHTML = "";
         var liElt = document.createElement('li');
         liElt.textContent = personnage;
-        ulElt.appendChild(liElt);
+        ulElt.appendChild(liElt); 
     });
-    console.log(personnages);
 });
-/*
-// Gerer l'évenement
-formElt.addEventListener('change', function(e){
-    for(var i = 0; i < personnages.length; i++) {
-        var liElt = document.createElement('li'); // Crée un élément li
-        var personnages = getPersonnages(e.target.value);
-        liElt.innerHTML = personnages[i];
-        console.log(personnages[i]);
-        document.getElementById('persos').appendChild(liElt);
-    }
-
-}); 
-*/
