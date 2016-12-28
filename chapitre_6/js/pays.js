@@ -20,38 +20,34 @@ var listePays = [
     "Azerbaïdjan"
 ];
 
-// Gerer l'input
 var inputElt = document.getElementById('pays');
 inputElt.addEventListener('input', function(e){
-    // comparer l'element entrer par l'utilisateur si il correspond au tableau
-    // lister les pay
+
+    /* recupere le div ou les suggestion seron afficher */
+    var suggestionsElt = document.getElementById('suggestions');
+        /* supprimer tout les contenus du conteneur des suggestion */
+        suggestionsElt.innerHTML = "";
+    /* Une boucle qui va parcourir tout le tableau */ 
     for(var i = 0; i < listePays.length; i++) {
-        // console.log(listePays[i]);
-        motRechercher = listePays[i].indexOf(e.target.value);
+        /* stocker le mot rechercher dans la variable motRechercher*/
+        motRechercher = listePays[i].indexOf(e.target.value); 
+        /* Si la variable motRechercher ne retourne pas -1 */
         if(motRechercher !== -1) {
-            // console.log(motRechercher);
-            // console.log(listePays[i]);
-            // creer un element div
+            /* creer un élément div */
             var divElt = document.createElement('div');
+            /* ajouter une classe à l'élément div */
             divElt.className = "suggestion";
+            /* ajoute du contenu textuel à l'élément div */
             divElt.textContent = listePays[i];
-
-            document.getElementById('suggestions').innerHTML = "";
-            document.getElementById('suggestions').appendChild(divElt); // Ajout des element dans la page
-
-            // gerer l'interaction dans pour pouvoir clicker l'élément et l'inserer dans l'input
+            /* Afficher l'élément dans la page */
+            suggestionsElt.appendChild(divElt); 
+            /* Lorsqu'on click sur le l'élément div */
             divElt.addEventListener('click', function(e){
-                // recupere l'élément input pour pouvoir inserer la sugestions
+                /* On complete mot par la suggestion */
                 document.getElementById('pays').value = e.target.textContent;
+                /* On vide le conteneur des suggestions */
+                document.getElementById('suggestions').innerHTML = "";
             });
         }
     }
 });
-
-
-
-
-// Create an array. (The elements start at index 0.)
-// var ar = ["ab", "cd", "ef", "ab", "cd"];
-// Determine the first location of "cd".
-// document.write(ar.indexOf("ef") + "<br/>");
