@@ -23,6 +23,9 @@ var listePays = [
 listePays.forEach(function(pays){
     // recupere id suggestions
     var suggestionsElt = document.getElementById('suggestions');
-    
+    suggestionsElt.textContent = pays;
+    // document.appendChild(suggestionsElt);
+
+
 
 });
