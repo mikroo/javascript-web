@@ -25,6 +25,30 @@ var listeLiens = [
 ];
 
 // TODO : compléter ce fichier pour ajouter les liens à la page web
+/* Gerer le formulaire */
+var ajoutLien = document.getElementById('ajoutLien');
+ajoutLien.addEventListener('click', function(){
+  // Enlever le bouton ajouter un lien
+  document.getElementById('formulaire').innerHTML = '';
+
+  // Créer le formulaire
+  var formElt = document.createElement('form');
+  var nomElt = document.createElement('input');
+      nomElt.placeholder = "Entrez votre nom";
+  var titreElt = document.createElement('input');
+      titreElt.placeholder = "Entrez le titre du lien";
+  var lienElt = document.createElement('input');
+      lienElt.placeholder = "Entrez l'URL du lien";
+  var buttonElt = document.createElement('button');
+      buttonElt.textContent = "Ajouter";
+
+  formElt.appendChild(nomElt);
+  formElt.appendChild(titreElt);
+  formElt.appendChild(lienElt);
+  formElt.appendChild(buttonElt);
+  document.getElementById('formulaire').appendChild(formElt);
+});
+
 
 for(var i = 0; i < listeLiens.length; i++) {
     var articleElt = document.createElement('article');
