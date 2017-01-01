@@ -31,7 +31,6 @@ ajoutLien.addEventListener('click', function(){
   // Enlever le bouton ajouter un lien
   document.getElementById('formulaire').innerHTML = '';
 
-  // Créer le formulaire
   var formElt = document.createElement('form');
   var nomElt = document.createElement('input');
       nomElt.placeholder = "Entrez votre nom";
@@ -49,6 +48,11 @@ ajoutLien.addEventListener('click', function(){
   document.getElementById('formulaire').appendChild(formElt);
 });
 
+/* Gerer la validation des donnees */
+var protocolSecure =/^https:\/\/\.[a-z0-9]+\.[a-z]{2,6}$/;
+var protocol = /^http:\/\/\.[a-z0-9]+\.[a-z]{2,6}$/;
+
+//1. Si le lien ne commence pas par http ou https On l'ajoute
 
 for(var i = 0; i < listeLiens.length; i++) {
     var articleElt = document.createElement('article');
