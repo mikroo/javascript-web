@@ -33,7 +33,7 @@ function diminuerCompteur() {
 // Appelle la fonction diminuerCompteur toutes les secondes (1000 millisecondes)
 var intervalId = setInterval(diminuerCompteur, 1000);
 */
-/*
+
 // Démarrer une action répétée
 var compteurElt = document.getElementById("compteur");
 
@@ -57,7 +57,7 @@ function diminuerCompteur() {
 
 // Appelle la fonction diminuerCompteur toutes les secondes (1000 millisecondes)
 var intervalId = setInterval(diminuerCompteur, 1000);
-*/
+
 
 /*
 // ANIMATION 
@@ -79,7 +79,7 @@ function deplacerBloc() {
 }
 requestAnimationFrame(deplacerBloc); // Début de l'animation
 */
-
+/*
 // Débuter une animation
 var cadre = document.getElementById('cadre');
 var bloc = document.getElementById('bloc');
@@ -105,3 +105,4 @@ function deplacerBloc() {
 	}
 }
 requestAnimationFrame(deplacerBloc); // Début de l'animation
+*/
