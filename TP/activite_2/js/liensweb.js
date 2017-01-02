@@ -25,7 +25,7 @@ var listeLiens = [
 ];
 
 // TODO : compléter ce fichier pour ajouter les liens à la page web
-/* Gerer le formulaire */
+/* Création du formulaire */
 var ajoutLien = document.getElementById('ajoutLien');
 ajoutLien.addEventListener('click', function(){
   // Enlever le bouton ajouter un lien
@@ -38,19 +38,25 @@ ajoutLien.addEventListener('click', function(){
       titreElt.placeholder = "Entrez le titre du lien";
   var lienElt = document.createElement('input');
       lienElt.placeholder = "Entrez l'URL du lien";
+      lienElt.required = 'required';
   var buttonElt = document.createElement('button');
       buttonElt.textContent = "Ajouter";
 
+  // Ajout du formulaire à la page
   formElt.appendChild(nomElt);
   formElt.appendChild(titreElt);
   formElt.appendChild(lienElt);
   formElt.appendChild(buttonElt);
   document.getElementById('formulaire').appendChild(formElt);
-});
 
-/* Gerer la validation des donnees */
-var protocolSecure =/^https:\/\/\.[a-z0-9]+\.[a-z]{2,6}$/;
-var protocol = /^http:\/\/\.[a-z0-9]+\.[a-z]{2,6}$/;
+  /* Gerer le formulaire */
+  formElt.addEventListener('submit', function(e){
+    var nom = nomElt.textContent;
+    console.log(nom);
+    e.preventDefault();
+  });
+
+});
 
 //1. Si le lien ne commence pas par http ou https On l'ajoute
 
