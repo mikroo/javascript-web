@@ -1,8 +1,15 @@
 /* 
 Activité 1
-Author : mikroo
-url : mikroo.com
 */
+// include
+function include(lien) {
+  var script = document.createElement('script');
+      script.src = lien;
+  document.querySelector('body').insertBefore(script, document.querySelector('script'));
+}
+
+include('../js/objects.js');
+
 
 // Liste des liens Web à afficher. Un lien est défini par :
 // - son titre
@@ -27,89 +34,96 @@ var listeLiens = [
 ];
 
 // TODO : compléter ce fichier pour ajouter les liens à la page web
-/* Inclure une page externe */
+function gererForm(formElt){
+  var listeLiens = [];
+  var nom = formElt.elements.nom.value;
+  var titre = formElt.elements.titre.value;
+  var lien = formElt.elements.lien.value;
+  // Si le lien ne commence pas par http => rajouter un
+  var regex = /^http:\/\//;
+  if(!regex.test(lien)) {
+    nwLien = "http://" + lien;
+  }
+  
 
-/*
-var Films = {
-  init: function (titre, annee, realisateur) {
-    this.titre = titre;
-    this.annee = annee;
-    this.realisateur = realisateur;
-  },
-  decrire: function(){
-    var description = this.titre + " (" + this.annee + ", " + this.realisateur + ")";
-    return description;
+  var newLink = Object.create(ListeLiens);
+  newLink.init(titre, nwLien, nom);
+  listeLiens.push(newLink);
+
+  // il doit afficher un seul entrer
+  ListeLiens.decrire(listeLiens);
+  // fonction qui va créer un message plash
+  function showMsg(titre){
+    var message = "Le lien " + titre + " à a bien été ajouter";
+    // creer un div
+    var divElt = document.createElement('div');
+    divElt.id = 'messageFlash';
+    divElt.textContent = message;
+
+    // Designe le div
+    divElt.style.color = '#002c44';
+    divElt.style.backgroundColor  = 'lightblue'; // #D6ECF6
+    divElt.style.marginTop = '20px';
+    divElt.style.padding = '20px 10px';
+    divElt.style.borderRadius = '5px';
+
+    // Ajouter le tout dans dom
+    document.getElementById('formulaire').appendChild(divElt);
   }
 
+  // Affiche un méssage pendand deux secondes
+  showMsg(titre);
+  // Il va supprimer le div après 2 secondes
+  setTimeout(function(){
+    document.querySelector('#formulaire').removeChild(document.querySelector('#messageFlash'));
+  }, 2000);
+
+  
+
+  listeLiens.forEach(function(lien){
+    console.log(lien);
+  });
 }
-var film1 = Object.create(Films);
-film1.init("Le loup de wall Stree", 2013, "Martin Scorsese");
-*/
 
-
-
-// creer un formulaire avec l'objet form
-
-
-var ajoutLien = document.getElementById('ajoutLien');
-ajoutLien.addEventListener('click', function(){
-  document.getElementById('formulaire').innerHTML = '';
-  // Début du formulaire
-  // creer un formularie
-  // creer le formulaire avec l'objet
-  var formElt = Form.createFormElt('form');
-  var nomElt = Form.createFormElt('input', 'Ton prénom'); 
-  var titreElt = Form.createFormElt('input', 'Titre du lien'); 
-  var lienElt = Form.createFormElt('input', 'url'); 
-  var sendElt = Form.createFormElt('button','Envoyer');
-
-  var tabElts = [nomElt, titreElt, lienElt, sendElt];
-
-  Form.createForm(formElt,tabElts,'formulaire');
-});
-
-/*
-//  Création du formulaire 
-ajoutLien.addEventListener('click', function(){
-  // supprime le bouton ajouter un lien
-  document.getElementById('formulaire').innerHTML = '';
-
+function createForm(){
+  // Supprimer le bouton ajouter un lien
+  document.querySelector('#formulaire').removeChild(document.querySelector('button'));
+  // fonction pour crée un formulaire
   var formElt = document.createElement('form');
   var nomElt = document.createElement('input');
-      nomElt.placeholder = "Entrez votre nom";
+  nomElt.placeholder = 'Prénom';
+  nomElt.name = 'nom';
   var titreElt = document.createElement('input');
-      titreElt.placeholder = "Entrez le titre du lien";
-  var lienElt = document.createElement('input');
-      lienElt.placeholder = "Entrez l'URL du lien";
-      lienElt.required = 'required';
-  var buttonElt = document.createElement('button');
-      buttonElt.textContent = "Ajouter";
-      buttonElt.type = "submit";
+  titreElt.placeholder = 'Titre';
+  titreElt.name = 'titre';
+  var urlElt = document.createElement('input');
+  urlElt.placeholder = 'url du web';
+  urlElt.required = 'required';
+  urlElt.name = 'lien';
+  var sendElt = document.createElement('button');
+  sendElt.textContent = 'Ajouter';
 
-
-  // Ajout du formulaire à la page
   formElt.appendChild(nomElt);
   formElt.appendChild(titreElt);
-  formElt.appendChild(lienElt);
-  formElt.appendChild(buttonElt);
+  formElt.appendChild(urlElt);
+  formElt.appendChild(sendElt);
   document.getElementById('formulaire').appendChild(formElt);
-});
-
-*/
 
 
-/* Gerer le formulaire qui va ajouter un lien */
-/*
-listeLiens.forEach(function(lien){
-  console.log(lien.url);
-})
+  // fonction qui gère le formulaire
+  formElt.addEventListener('submit', function(e){
+    gererForm(formElt);
+    e.preventDefault();
+  });
+}
 
-console.log('----------------------------');
-var autreLien = {'titre': 'mikroo inc', 'url' :'http://mikroo.com', 'auteur':'Chancy'};
-listeLiens.push(autreLien);
 
+// Crée le formulaire
+var ajouterUnLien = document.querySelector('#ajoutLien');
+ajouterUnLien.addEventListener('click', function(){ createForm(); });
+
+// Afficher le tableau
+ListeLiens.decrire(listeLiens);
 listeLiens.forEach(function(lien){
   console.log(lien);
-})
-// Ajouter une entrer dans un tableau
-*/
+});
