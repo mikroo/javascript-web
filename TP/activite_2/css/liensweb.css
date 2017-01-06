@@ -15,19 +15,3 @@ span {
     padding: 10px;
     margin-bottom: 10px;
 }
-
-/* CHAMPTS INPUTS SANS BORDUR
- * ESPACE ENTRE LES CHAMPT INPUTS
- */
-
-input, button {
- 	border: 0px;
- 	padding: 5px;
- 	margin-right: 20px;
-}
-input{
-	border: 1px solid lightgrey;
-}
-button {
- 	background-color: lightgrey;
-}

@@ -1,15 +1,6 @@
 /* 
 Activité 1
 */
-// include
-function include(lien) {
-  var script = document.createElement('script');
-      script.src = lien;
-  document.querySelector('body').insertBefore(script, document.querySelector('script'));
-}
-
-include('../js/objects.js');
-
 
 // Liste des liens Web à afficher. Un lien est défini par :
 // - son titre
@@ -34,96 +25,154 @@ var listeLiens = [
 ];
 
 // TODO : compléter ce fichier pour ajouter les liens à la page web
-function gererForm(formElt){
-  var listeLiens = [];
-  var nom = formElt.elements.nom.value;
-  var titre = formElt.elements.titre.value;
-  var lien = formElt.elements.lien.value;
-  // Si le lien ne commence pas par http => rajouter un
-  var regex = /^http:\/\//;
-  if(!regex.test(lien)) {
-    nwLien = "http://" + lien;
-  }
+/* Fonction insertAfter() */
+function insertAfter(newElement, afterElement) {
+    var parent = afterElement.parentNode;
   
+    if (parent.lastChild === afterElement) { // Si le dernier élément est le même que l'élément après lequel on veut insérer, il suffit de faire appendChild()
+        parent.appendChild(newElement);
+    } else { // Dans le cas contraire, on fait un insertBefore() sur l'élément suivant
+        parent.insertBefore(newElement, afterElement.nextSibling);
+    }
+}
+// Fonction qui va afficher le message flash
+function showMsg(titre){
+  var message = "Le lien " + titre + " à bien été ajouter";
+          // creer un div
+          var divElt = document.createElement('div');
+          divElt.id = 'messageFlash';
+          divElt.textContent = message;
 
-  var newLink = Object.create(ListeLiens);
-  newLink.init(titre, nwLien, nom);
-  listeLiens.push(newLink);
+          // style du div
+          divElt.style.color = '#002c44';
+          divElt.style.backgroundColor  = 'lightblue'; // #D6ECF6
+          // divElt.style.marginTop = '20px';
+          divElt.style.padding = '20px 10px';
+          divElt.style.borderRadius = '5px';
+          divElt.style.marginBottom = '20px';
 
-  // il doit afficher un seul entrer
-  ListeLiens.decrire(listeLiens);
-  // fonction qui va créer un message plash
-  function showMsg(titre){
-    var message = "Le lien " + titre + " à a bien été ajouter";
-    // creer un div
-    var divElt = document.createElement('div');
-    divElt.id = 'messageFlash';
-    divElt.textContent = message;
+          zoneAjoutLien.innerHTML = '';
+          zoneAjoutLien.appendChild(divElt);
+          console.log('élément ajouter avec succès');
 
-    // Designe le div
-    divElt.style.color = '#002c44';
-    divElt.style.backgroundColor  = 'lightblue'; // #D6ECF6
-    divElt.style.marginTop = '20px';
-    divElt.style.padding = '20px 10px';
-    divElt.style.borderRadius = '5px';
+          setTimeout(function(){
+          zoneAjoutLien.removeChild(divElt);
+        }, 2000);
+    }
 
-    // Ajouter le tout dans dom
-    document.getElementById('formulaire').appendChild(divElt);
-  }
+// Fonction qui  met en forme les liens
+function createLink(link){
+  // article block
+  var articleElt = document.createElement('article');
+  articleElt.className = 'lien';
+  // h4 titre
+  var h4Elt = document.createElement('h4');
+  h4Elt.style.display = 'inline';
+  // a lien
+  var aElt = document.createElement('a');
+  aElt.href = link.url;
+  aElt.textContent = link.titre;
+  // a style
+  aElt.style.textDecoration = 'none';
+  aElt.style.color = '#428bca';
+  // ajout a + h4 dans articleElt
+  h4Elt.appendChild(aElt);
+  articleElt.appendChild(h4Elt);
+  // url
+  var spanElt = document.createElement('span');
+  spanElt.textContent = ' ' + link.url;
+  articleElt.appendChild(spanElt);
+  // auteur
+  var auteurSpanElt = document.createElement('span');
+  auteurSpanElt.style.display = 'block';
+  auteurSpanElt.textContent = 'Ajouté par ' + link.auteur;
+  articleElt.appendChild(auteurSpanElt);
 
-  // Affiche un méssage pendand deux secondes
-  showMsg(titre);
-  // Il va supprimer le div après 2 secondes
-  setTimeout(function(){
-    document.querySelector('#formulaire').removeChild(document.querySelector('#messageFlash'));
-  }, 2000);
-
-  
-
-  listeLiens.forEach(function(lien){
-    console.log(lien);
-  });
+  return articleElt;
 }
 
-function createForm(){
-  // Supprimer le bouton ajouter un lien
-  document.querySelector('#formulaire').removeChild(document.querySelector('button'));
-  // fonction pour crée un formulaire
-  var formElt = document.createElement('form');
-  var nomElt = document.createElement('input');
-  nomElt.placeholder = 'Prénom';
-  nomElt.name = 'nom';
-  var titreElt = document.createElement('input');
-  titreElt.placeholder = 'Titre';
-  titreElt.name = 'titre';
-  var urlElt = document.createElement('input');
-  urlElt.placeholder = 'url du web';
-  urlElt.required = 'required';
-  urlElt.name = 'lien';
-  var sendElt = document.createElement('button');
-  sendElt.textContent = 'Ajouter';
+// créer le bouton ajouter un lien
+var bodyElt = document.querySelector('body');
+var contenuElt = document.querySelector('#contenu');
 
-  formElt.appendChild(nomElt);
-  formElt.appendChild(titreElt);
-  formElt.appendChild(urlElt);
-  formElt.appendChild(sendElt);
-  document.getElementById('formulaire').appendChild(formElt);
+var zoneAjoutLien = document.createElement('div');
+    zoneAjoutLien.id = 'zoneAjoutLien';
+    insertAfter(zoneAjoutLien, document.querySelector('h1'));
 
+var ajoutLien = document.createElement('button');
+    ajoutLien.textContent = 'Ajouter un lien';
+    ajoutLien.style.marginBottom = '20px'; 
 
-  // fonction qui gère le formulaire
-  formElt.addEventListener('submit', function(e){
-    gererForm(formElt);
-    e.preventDefault();
-  });
-}
+    document.querySelector('#zoneAjoutLien').appendChild(ajoutLien);
 
+    ajoutLien.addEventListener('click', function(){
+      zoneAjoutLien.innerHTML = ''; // vider la zone qui contien l'élément ajouter un lien
+      // creer le formulaire
+      var formElt = document.createElement('form');
+      formElt.style.marginBottom = '20px';
 
-// Crée le formulaire
-var ajouterUnLien = document.querySelector('#ajoutLien');
-ajouterUnLien.addEventListener('click', function(){ createForm(); });
+      var titreElt = document.createElement('input');
+      titreElt.name = 'titre';
+      titreElt.placeholder = 'Entrez le titre du lien';
+      titreElt.required = true;
 
-// Afficher le tableau
-ListeLiens.decrire(listeLiens);
+      var urlElt = document.createElement('input');
+      urlElt.name = 'lien';
+      urlElt.placeholder = 'Entrez l\'URL du lien';
+      urlElt.required = true;
+
+      var auteurElt = document.createElement('input');
+      auteurElt.name = 'auteur';
+      auteurElt.placeholder = 'Entrez votre nom';
+      auteurElt.required = true;
+
+      var sendInput = document.createElement('input');
+      sendInput.id = 'ajouter'; 
+      sendInput.value = 'Ajouter';
+      sendInput.type = 'submit';
+
+      formElt.appendChild(titreElt);
+      formElt.appendChild(urlElt);
+      formElt.appendChild(auteurElt);
+      formElt.appendChild(sendInput);
+      document.querySelector('#zoneAjoutLien').appendChild(formElt);
+      //Style élément inputs
+      var inputElts = document.querySelectorAll('input');
+          for(var i = 0; i < inputElts.length; i++){
+            inputElts[i].style.padding = '5px';
+            inputElts[i].style.marginRight = '20px';
+          }
+
+      // Gerer le formulaire
+      formElt.addEventListener('submit', function(e){
+        // ^https?:\/\/[a-z]+\.[a-z]{2,6}
+        var regex = /^https?:\/\/[a-z]+\.[a-z]{2,6}/;
+        var titre = formElt.elements.titre.value;
+        var lien = formElt.elements.lien.value;
+        if(!regex.test(lien)){
+          lien = 'http://' + lien;  
+        }
+        var auteur = formElt.elements.auteur.value;
+
+        // Ajouter un nouveau lien dans le dom
+        var newLink = {
+                  titre: titre,
+                  url: lien,
+                  auteur: auteur
+                };
+        
+        var singleLink = createLink(newLink);
+        contenuElt.insertBefore(singleLink, contenuElt.firstChild);
+        // Affiche le message flash
+        showMsg(titre);
+
+        // vider la zone bouton ajouter un lien
+        zoneAjoutLien.appendChild(ajoutLien);
+        e.preventDefault();
+      });
+    });
+// lecture des éléments
 listeLiens.forEach(function(lien){
-  console.log(lien);
+  var singleLink = createLink(lien);
+  contenuElt.appendChild(singleLink);
 });

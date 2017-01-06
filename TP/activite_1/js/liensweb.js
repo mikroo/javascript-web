@@ -25,6 +25,8 @@ var listeLiens = [
 ];
 
 // TODO : compléter ce fichier pour ajouter les liens à la page web
+// Crée le bouton ajouter un lien
+
 
 for(var i = 0; i < listeLiens.length; i++) {
     var articleElt = document.createElement('article');
