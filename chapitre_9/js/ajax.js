@@ -9,6 +9,7 @@ function ajaxGet(url, callback) {
             console.error(req.status + " " + req.statusText + " " + url);
         }
     });
+    
     req.addEventListener("error", function () {
         console.error("Erreur réseau avec l'URL " + url);
     });
