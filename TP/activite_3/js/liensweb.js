@@ -167,12 +167,18 @@ var ajoutLien = document.createElement('button');
         }
         var auteur = formElt.elements.auteur.value;
 
+        var data = new FormData(formElt);
+        /*
         // Ajouter un nouveau lien dans le dom
-        var newLink = {
+        var data = {
                   titre: titre,
                   url: lien,
                   auteur: auteur
                 };
+        */
+        ajaxPost("https://oc-jswebsrv.herokuapp.com/api/lien", data, function(){
+
+        }, true);
         
         var singleLink = createLink(newLink);
         contenuElt.insertBefore(singleLink, contenuElt.firstChild);
