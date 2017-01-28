@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/liensweb.css">
+    <title>Activité 3</title>
+</head>
+
+<body>
+    <h1>Activité 3</h1>
+
+    <!-- Les nouveaux éléments sont ajoutés dans cette balise -->
+    <div id="contenu">
+    </div>
+
+    <script src="../js/ajax.js"></script>
+    <script src="../js/liensweb.js"></script>
+</body>
+
+</html>
