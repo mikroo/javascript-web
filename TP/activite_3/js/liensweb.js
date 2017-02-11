@@ -31,7 +31,7 @@ var url = "https://oc-jswebsrv.herokuapp.com/api/liens";
 // 1. recupérer les liens
 ajaxGet(url, function(reponse){
   var listeLien = JSON.parse(reponse);
-  console.log(listeLien[0]);
+  // console.log(listeLien[0]);
 })
 
 
@@ -158,6 +158,20 @@ var ajoutLien = document.createElement('button');
 
       // Gerer le formulaire
       formElt.addEventListener('submit', function(e){
+        e.preventDefault();
+
+        var newLink = {
+          "titre" : "monTitre",
+          "url" : "monLien",
+          "auteur" : "monAuteur"
+        }
+
+        ajaxPost("https://oc-jswebsrv.herokuapp.com/api/lien", newLink, function(reponse){
+          // afficher un message au client 
+          console.log(newLink);
+        }, true);
+
+        /*
         // ^https?:\/\/[a-z]+\.[a-z]{2,6}
         var regex = /^https?:\/\/[a-z]+\.[a-z]{2,6}/;
         var titre = formElt.elements.titre.value;
@@ -176,6 +190,7 @@ var ajoutLien = document.createElement('button');
                   auteur: auteur
                 };
         */
+        /*
         ajaxPost("https://oc-jswebsrv.herokuapp.com/api/lien", data, function(){
 
         }, true);
@@ -187,7 +202,7 @@ var ajoutLien = document.createElement('button');
 
         // vider la zone bouton ajouter un lien
         zoneAjoutLien.appendChild(ajoutLien);
-        e.preventDefault();
+        */
       });
     });
 
@@ -204,10 +219,12 @@ var url = "https://oc-jswebsrv.herokuapp.com/api/liens";
 // 1. recupérer les liens
 ajaxGet(url, function(reponse){
   var listeLiens = JSON.parse(reponse);
-  console.log(listeLiens);
+  // console.log(listeLiens);
     listeLiens.forEach(function(lien){
       var singleLink = createLink(lien);
       contenuElt.appendChild(singleLink);
     });
 
 })
+// -------------------------------------------------------------
+
