@@ -5,7 +5,8 @@ var addLinkContainerElt = document.createElement('div');
 addLinkContainerElt.style.paddingBottom = "20px";
 var addLinkElt = document.createElement('button');
 addLinkElt.style.padding = "5px";
-addLinkElt.textContent = "Ajouter un lien";
+// addLinkElt.textContent = "Ajouter un lien";
+addLinkElt.createTextNode("Ajouter un lien");
 addLinkContainerElt.appendChild(addLinkElt);
 
 // recuperer le conteneur
