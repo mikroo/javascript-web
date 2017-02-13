@@ -84,7 +84,7 @@ addLinkElt.addEventListener('click', function(){
 });
 
 // 1. recuperer les donnees de la base de données
-var url = " https://oc-jswebsrv.herokuapp.com/api/liens";
+var url = "https://oc-jswebsrv.herokuapp.com/api/liens";
 ajaxGet(url, function(reponse){
   var listeLiens = JSON.parse(reponse);
   // Parcours de la liste des liens et ajout d'un élément au DOM pour chaque lien
