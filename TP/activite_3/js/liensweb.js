@@ -4,8 +4,11 @@
 var addLinkContainerElt = document.createElement('div');
 addLinkContainerElt.style.paddingBottom = "20px";
 var addLinkElt = document.createElement('button');
+
+var ajoutLien = document.createTextNode('Ajouter un lien');
+addLinkElt.appendChild(ajoutLien);
 addLinkElt.style.padding = "5px";
-addLinkElt.textContent = "Ajouter un lien";
+
 addLinkContainerElt.appendChild(addLinkElt);
 
 // recuperer le conteneur
@@ -72,7 +75,7 @@ addLinkElt.addEventListener('click', function(){
     var elementLien = creerElementLien(lien);
     containerElt.insertBefore(elementLien, containerElt.firstChild);
 
-    showMsg(nomElt.value);
+    showMsg(titreElt.value);
     console.log("Le nouveau lien est ajouté" + JSON.stringify(lien));
   },
   true // Valeur du paramètre isJson
